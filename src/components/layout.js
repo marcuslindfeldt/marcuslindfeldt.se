@@ -119,6 +119,14 @@ const NavLink = styled(Link)`
   }
 `
 
+export const CenterLayout = styled.div`
+  grid-area: body;
+  align-self: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`
+
 class Layout extends Component {
   state = {
     darkMode: false,
