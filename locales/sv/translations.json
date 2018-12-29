@@ -1,0 +1,35 @@
+{
+  "pageNotFoundTitle": "Oops",
+  "pageNotFoundText": "Sidan du försökte nå verkar inte finnas",
+
+  "languageSwitcher": "Byt språk",
+  "invertTheme": "Invertera färger",
+
+  "nav": {
+    "home": "hem",
+    "about": "om mig",
+    "contact": "kontakt"
+  },
+
+  "home": {
+    "pageTitle": "Hem",
+    "aboutLink": "Om mig"
+  },
+
+  "about": {
+    "pageTitle": "Om mig",
+    "portraitAlt": "Porträtt",
+    "aboutMeText": "Ambitiös, erfaren och kreativ webbutvecklare med kunskapen att ta ett mjukvaruprojekt från idé till färdig produkt. Hög kunskap inom HTML, CSS, JavaScript, React, Node.js, cloud och mjukvaruarkitektur. Professionell problemlösare med en bakgrund från Lunds Universitet."
+  },
+
+  "contact": {
+    "pageTitle": "Kontakt",
+    "title": "Kontakta mig!",
+    "info": "Behöver du en webbutvecklare? Skicka iväg ett meddelande så hör jag av mig så snart jag kan. <1></1><2></2>Gillar du inte formulär? Skicka ett <5>email</5> istället.",
+    "formName": "Namn",
+    "formEmail": "Email",
+    "formBodyPlaceholder": "Meddelande...",
+    "formBodyLabel": "Meddelande",
+    "formSubmit": "Skicka"
+  }
+}
