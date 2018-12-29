@@ -1,11 +1,11 @@
 import React from 'react'
+import { graphql } from 'gatsby'
+import Img from 'gatsby-image'
 import styled, { keyframes, createGlobalStyle } from 'styled-components'
 import { withNamespaces } from 'react-i18next'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-
-import portraitSrc from '../images/portrait.jpg'
 
 const slideUp = keyframes`
   from {
@@ -35,6 +35,7 @@ const AboutMeText = styled.p`
   padding-top: 50px;
   opacity: 0;
   font-weight: 300;
+  flex: 2;
 
   color: ${props => (props.theme.darkMode ? '#fff' : '#333')};
 
@@ -76,17 +77,36 @@ const Portrait = styled.img`
   height: 100%;
   overflow: hidden;
   object-fit: cover;
+  flex: 3;
+  will-change: transform;
   animation: ${slideIn} 250ms ease-out;
   transform-origin: right;
 `
+export const query = graphql`
+  query {
+    portrait: file(relativePath: { eq: "portrait.jpg" }) {
+      childImageSharp {
+        # Specify the image processing specifications right in the query.
+        # Makes it trivial to update as your page's design changes.
+        fluid(maxWidth: 1500, quality: 80) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`
 
-const AboutPage = ({ t }) => (
+const AboutPage = ({ t, data }) => (
   <Layout navBackground>
     <BackgroundColor />
     <SEO title={t('about.pageTitle')} />
     <Wrap>
       <AboutMeText>{t('about.aboutMeText')}</AboutMeText>
-      <Portrait src={portraitSrc} alt={t('about.portraitAlt')} />
+      <Portrait
+        as={Img}
+        fluid={data.portrait.childImageSharp.fluid}
+        alt={t('about.portraitAlt')}
+      />
     </Wrap>
   </Layout>
 )
