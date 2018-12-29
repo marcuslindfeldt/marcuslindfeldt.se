@@ -195,12 +195,18 @@ const ContactPage = ({ t }) => (
       </ContactInfo>
       <Form
         name="contact"
-        method="POST"
+        method="post"
+        action="/thanks"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
       >
-        <input type="hidden" name="form-name" value="contact" />
-        <input type="hidden" name="bot-field" />
+        <input
+          type="hidden"
+          name="form-name"
+          value="contact"
+          aria-hidden="true"
+        />
+        <input type="hidden" name="bot-field" aria-hidden="true" />
         <FormInput
           type="text"
           name="name"

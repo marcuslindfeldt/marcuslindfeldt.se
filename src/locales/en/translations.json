@@ -31,5 +31,11 @@
     "formBodyPlaceholder": "Write your message here...",
     "formBodyLabel": "Message",
     "formSubmit": "Send"
+  },
+
+  "thanks": {
+    "pageTitle": "Message sent",
+    "title": "Thanks!",
+    "text": "Your message is on its way"
   }
 }

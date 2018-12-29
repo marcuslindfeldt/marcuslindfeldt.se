@@ -31,5 +31,11 @@
     "formBodyPlaceholder": "Meddelande...",
     "formBodyLabel": "Meddelande",
     "formSubmit": "Skicka"
+  },
+
+  "thanks": {
+    "pageTitle": "Meddelande skickat",
+    "title": "Tack!",
+    "text": "Ditt meddelande har skickats"
   }
 }
