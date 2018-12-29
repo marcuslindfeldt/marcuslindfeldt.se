@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { navigate } from 'gatsby'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import { withNamespaces } from 'react-i18next'
 import styled from 'styled-components'
@@ -69,7 +70,7 @@ class ContactForm extends Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({ 'form-name': 'contact', ...this.state }),
     })
-      .then(() => alert('Success!'))
+      .then(() => navigate('/thanks'))
       .catch(error => alert(error))
 
     e.preventDefault()
@@ -87,7 +88,6 @@ class ContactForm extends Component {
         name="contact"
         onSubmit={this.handleSubmit}
         method="post"
-        action="/thanks"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
       >
