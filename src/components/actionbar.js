@@ -1,8 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { injectIntl } from 'react-intl'
+
+import { Subscribe } from 'unstated'
+
+import LocaleContainer from '../state/locale'
+import ThemeContainer from '../state/theme'
 
 import InvertIcon from './inverticon'
 
@@ -33,25 +37,25 @@ const ActionButton = styled.button`
   }
 `
 
-const ActionBar = ({ invertTheme, locale, toggleLocale, intl }) => (
-  <ActionBarContainer className="actionbar">
-    <ActionButton
-      aria-label={intl.formatMessage({ id: 'languageSwitcher' })}
-      onClick={toggleLocale}
-    >
-      {locale}
-    </ActionButton>
-    <ActionButton
-      onClick={invertTheme}
-      aria-label={intl.formatMessage({ id: 'invertTheme' })}
-    >
-      <InvertIcon />
-    </ActionButton>
-  </ActionBarContainer>
+const ActionBar = ({ intl }) => (
+  <Subscribe to={[LocaleContainer, ThemeContainer]}>
+    {(locale, theme) => (
+      <ActionBarContainer className="actionbar">
+        <ActionButton
+          aria-label={intl.formatMessage({ id: 'languageSwitcher' })}
+          onClick={locale.toggleLocale}
+        >
+          {locale.state.locale}
+        </ActionButton>
+        <ActionButton
+          onClick={theme.invertTheme}
+          aria-label={intl.formatMessage({ id: 'invertTheme' })}
+        >
+          <InvertIcon />
+        </ActionButton>
+      </ActionBarContainer>
+    )}
+  </Subscribe>
 )
-
-ActionBar.propTypes = {
-  invertTheme: PropTypes.func.isRequired,
-}
 
 export default injectIntl(ActionBar)

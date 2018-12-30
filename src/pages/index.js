@@ -3,7 +3,6 @@ import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 
 import { FormattedMessage } from 'react-intl'
-
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 
 import Layout from '../components/layout'
