@@ -43,10 +43,11 @@ export const CenterLayout = styled.div`
 
 class Layout extends Component {
   componentDidMount() {
-    window.scrollTo(0, 0)
+    global.window.scrollTo(0, 0)
   }
 
   render() {
+    const { children, navBackground } = this.props
     return (
       <Subscribe to={[ThemeContainer]}>
         {theme => (
@@ -57,8 +58,8 @@ class Layout extends Component {
                 <GlobalStyle />
                 <LayoutGrid>
                   <Header />
-                  <Nav background={this.props.navBackground} />
-                  {this.props.children}
+                  <Nav background={navBackground} />
+                  {children}
                 </LayoutGrid>
               </>
             </ThemeProvider>
@@ -69,8 +70,13 @@ class Layout extends Component {
   }
 }
 
+Layout.defaultProps = {
+  navBackground: false,
+}
+
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  navBackground: PropTypes.bool,
 }
 
 export default Layout

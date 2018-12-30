@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import styled from 'styled-components'
@@ -52,11 +53,15 @@ const SubmitButton = styled.button`
   }
 `
 
-const encode = data => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+const encode = data =>
+  Object.keys(data)
+    .map(
+      key =>
+        `${global.encodeURIComponent(key)}=${global.encodeURIComponent(
+          data[key]
+        )}`
+    )
     .join('&')
-}
 
 class ContactForm extends Component {
   state = {
@@ -66,13 +71,15 @@ class ContactForm extends Component {
   }
 
   handleSubmit = e => {
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contact', ...this.state }),
-    })
+    global
+      .fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({ 'form-name': 'contact', ...this.state }),
+      })
       .then(() => navigate('/thanks'))
-      .catch(error => alert(error))
+      // eslint-disable-next-line no-console
+      .catch(error => console.error(error))
 
     e.preventDefault()
   }
@@ -136,6 +143,12 @@ class ContactForm extends Component {
       </Form>
     )
   }
+}
+
+ContactForm.propTypes = {
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
 }
 
 export default injectIntl(ContactForm)

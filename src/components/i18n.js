@@ -1,15 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Subscribe } from 'unstated'
 import { IntlProvider, addLocaleData } from 'react-intl'
-import LocaleContainer from '../state/locale'
-
 import en from 'react-intl/locale-data/en'
 import sv from 'react-intl/locale-data/sv'
+import flatten from 'flat'
+import LocaleContainer from '../state/locale'
 
 import translationEN from '../locales/en/translations.json'
 import translationSV from '../locales/sv/translations.json'
-
-import flatten from 'flat'
 
 const messages = {
   en: translationEN,
@@ -30,5 +29,9 @@ const I18n = ({ children }) => (
     )}
   </Subscribe>
 )
+
+I18n.propTypes = {
+  children: PropTypes.node.isRequired,
+}
 
 export default I18n

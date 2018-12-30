@@ -87,6 +87,7 @@ const SocialList = styled.ul`
   transform-origin: bottom;
 `
 
+/* eslint-disable no-irregular-whitespace */
 const SocialListItem = styled.li`
   display: inline;
   list-style-type: none;
@@ -103,6 +104,7 @@ const SocialListItem = styled.li`
     content: ' /';
   }
 `
+/* eslint-enable no-irregular-whitespace */
 
 const SocialLink = styled.a`
   color: inherit;

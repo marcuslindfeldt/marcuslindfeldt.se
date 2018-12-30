@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 
@@ -81,8 +82,8 @@ const NavLink = styled(Link)`
   }
 `
 
-const Nav = ({ navBackground }) => (
-  <Navbar background={navBackground}>
+const Nav = ({ background }) => (
+  <Navbar background={background}>
     <NavLink to="/">
       <FormattedMessage id="nav.home" />
     </NavLink>
@@ -94,5 +95,13 @@ const Nav = ({ navBackground }) => (
     </NavLink>
   </Navbar>
 )
+
+Nav.defaultProps = {
+  background: false,
+}
+
+Nav.propTypes = {
+  background: PropTypes.bool,
+}
 
 export default Nav

@@ -37,6 +37,7 @@ module.exports = {
         icon: 'src/images/logo-black@2x.png', // This path is relative to the root of the site.
       },
     },
+    `gatsby-plugin-eslint`,
     `gatsby-plugin-netlify`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline

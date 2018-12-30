@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { injectIntl } from 'react-intl'
@@ -57,5 +58,11 @@ const ActionBar = ({ intl }) => (
     )}
   </Subscribe>
 )
+
+ActionBar.propTypes = {
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
+}
 
 export default injectIntl(ActionBar)

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled, { keyframes, createGlobalStyle } from 'styled-components'
@@ -130,5 +131,9 @@ const AboutPage = ({ data }) => (
     </AboutLayout>
   </Layout>
 )
+
+AboutPage.propTypes = {
+  data: PropTypes.shape({}).isRequired,
+}
 
 export default AboutPage
