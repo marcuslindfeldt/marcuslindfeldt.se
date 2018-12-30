@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
-import { withNamespaces } from 'react-i18next'
+
+import { FormattedMessage } from 'react-intl'
 
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 
@@ -57,7 +58,7 @@ const fadeInUp = keyframes`
 
 const HeroTitle = styled.h1`
   font-family: Work Sans, sans-serif;
-  font-size: 64px;
+  font-size: 48px;
   line-height: 1;
   font-weight: 700;
   color: ${props => (props.theme.darkMode ? '#fff' : '#333')};
@@ -68,6 +69,10 @@ const HeroTitle = styled.h1`
   animation: ${fadeInUp} 150ms ease-out 150ms;
   animation-fill-mode: forwards;
   transform-origin: bottom;
+
+  @media (min-width: 400px) {
+    font-size: 64px;
+  }
 `
 
 const SocialList = styled.ul`
@@ -91,12 +96,12 @@ const SocialListItem = styled.li`
   color: ${props => (props.theme.darkMode ? '#fff' : '#333')};
   font-size: 18px;
 
-  :after {
-    content: ' / ';
+  :before {
+    content: ' / ';
   }
 
-  &:first-child:before {
-    content: '/ ';
+  &:last-child:after {
+    content: ' /';
   }
 `
 
@@ -163,10 +168,14 @@ const AboutLinkIcon = styled(ArrowForwardIcon)`
   }
 `
 
-const IndexPage = ({ t }) => (
+const IndexPage = () => (
   <Layout>
-    <SEO title={t('home.pageTitle')} />
+    <FormattedMessage id="home.pageTitle">
+      {txt => <SEO title={txt} />}
+    </FormattedMessage>
+
     <Background />
+
     <Hero>
       <CenterLayout>
         <HeroTitle>Marcus Lindfeldt</HeroTitle>
@@ -200,14 +209,18 @@ const IndexPage = ({ t }) => (
             </SocialLink>
           </SocialListItem>
         </SocialList>
-        <AboutLink to="/about" aria-label={t('home.aboutLink')}>
-          <AboutLinkFadeInAnimation>
-            <AboutLinkIcon />
-          </AboutLinkFadeInAnimation>
-        </AboutLink>
+        <FormattedMessage id="home.aboutLink">
+          {txt => (
+            <AboutLink to="/about" aria-label={txt}>
+              <AboutLinkFadeInAnimation>
+                <AboutLinkIcon />
+              </AboutLinkFadeInAnimation>
+            </AboutLink>
+          )}
+        </FormattedMessage>
       </CenterLayout>
     </Hero>
   </Layout>
 )
 
-export default withNamespaces()(IndexPage)
+export default IndexPage

@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { withNamespaces } from 'react-i18next'
-import LanguageSwitcher from './language-switcher'
+
+import { injectIntl } from 'react-intl'
+
 import InvertIcon from './inverticon'
 
 const ActionBarContainer = styled.div`
@@ -32,10 +33,18 @@ const ActionButton = styled.button`
   }
 `
 
-const ActionBar = ({ invertTheme, i18n, t }) => (
+const ActionBar = ({ invertTheme, locale, toggleLocale, intl }) => (
   <ActionBarContainer className="actionbar">
-    <ActionButton as={LanguageSwitcher} aria-label={t('languageSwitcher')} />
-    <ActionButton onClick={invertTheme} aria-label={t('invertTheme')}>
+    <ActionButton
+      aria-label={intl.formatMessage({ id: 'languageSwitcher' })}
+      onClick={toggleLocale}
+    >
+      {locale}
+    </ActionButton>
+    <ActionButton
+      onClick={invertTheme}
+      aria-label={intl.formatMessage({ id: 'invertTheme' })}
+    >
       <InvertIcon />
     </ActionButton>
   </ActionBarContainer>
@@ -45,4 +54,4 @@ ActionBar.propTypes = {
   invertTheme: PropTypes.func.isRequired,
 }
 
-export default withNamespaces()(ActionBar)
+export default injectIntl(ActionBar)

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { navigate } from 'gatsby'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
-import { withNamespaces } from 'react-i18next'
 import styled from 'styled-components'
+import { injectIntl } from 'react-intl'
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  min-width: 250px;
   flex: 2;
 `
 
@@ -80,8 +81,7 @@ class ContactForm extends Component {
 
   render() {
     const { name, email, message } = this.state
-
-    const { t } = this.props
+    const { intl } = this.props
 
     return (
       <Form
@@ -102,8 +102,8 @@ class ContactForm extends Component {
           type="text"
           name="name"
           required
-          aria-label={t('contact.formName')}
-          placeholder={t('contact.formName')}
+          aria-label={intl.formatMessage({ id: 'contact.formName' })}
+          placeholder={intl.formatMessage({ id: 'contact.formName' })}
           value={name}
           onChange={this.handleChange}
         />
@@ -111,8 +111,8 @@ class ContactForm extends Component {
           type="email"
           name="email"
           required
-          aria-label={t('contact.formEmail')}
-          placeholder={t('contact.formEmail')}
+          aria-label={intl.formatMessage({ id: 'contact.formEmail' })}
+          placeholder={intl.formatMessage({ id: 'contact.formEmail' })}
           value={email}
           onChange={this.handleChange}
         />
@@ -122,13 +122,15 @@ class ContactForm extends Component {
           required
           cols="30"
           rows="10"
-          aria-label={t('contact.formBodyLabel')}
-          placeholder={t('contact.formBodyPlaceholder')}
+          aria-label={intl.formatMessage({ id: 'contact.formBodyLabel' })}
+          placeholder={intl.formatMessage({
+            id: 'contact.formBodyPlaceholder',
+          })}
           value={message}
           onChange={this.handleChange}
         />
         <SubmitButton type="submit">
-          {t('contact.formSubmit')}{' '}
+          {intl.formatMessage({ id: 'contact.formSubmit' })}{' '}
           <ArrowForwardIcon style={{ fontSize: '20px' }} />
         </SubmitButton>
       </Form>
@@ -136,4 +138,4 @@ class ContactForm extends Component {
   }
 }
 
-export default withNamespaces()(ContactForm)
+export default injectIntl(ContactForm)

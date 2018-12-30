@@ -1,6 +1,9 @@
 {
-  "pageNotFoundTitle": "Oops",
-  "pageNotFoundText": "Sidan du försökte nå verkar inte finnas",
+  "404": {
+    "pageTitle": "Sidan kunde inte hittas",
+    "title": "Oops",
+    "text": "Sidan du försökte nå verkar inte finnas"
+  },
 
   "languageSwitcher": "Byt språk",
   "invertTheme": "Invertera färger",
@@ -25,7 +28,8 @@
   "contact": {
     "pageTitle": "Kontakt",
     "title": "Kontakta mig!",
-    "info": "Behöver du en webbutvecklare? Skicka iväg ett meddelande så hör jag av mig så snart jag kan. <1></1><2></2>Gillar du inte formulär? Skicka ett <5>email</5> istället.",
+    "info": "Behöver du en webbutvecklare? Skicka iväg ett meddelande så hör jag av mig så snart jag kan.",
+    "emailText": "Gillar du inte formulär? Skicka ett {emailLink} istället.",
     "formName": "Namn",
     "formEmail": "Email",
     "formBodyPlaceholder": "Meddelande...",

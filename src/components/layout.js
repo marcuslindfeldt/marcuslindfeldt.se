@@ -3,15 +3,29 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import { Link } from 'gatsby'
 
-import '../utils/i18n'
-
-import { withNamespaces } from 'react-i18next'
 import { Normalize } from 'styled-normalize'
 import ActionBar from './actionbar'
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 import logoBlack from '../images/logo-black.svg'
 import logoWhite from '../images/logo-white.svg'
+
+import { IntlProvider, FormattedMessage, addLocaleData } from 'react-intl'
+
+import en from 'react-intl/locale-data/en'
+import sv from 'react-intl/locale-data/sv'
+
+import translationEN from '../locales/en/translations.json'
+import translationSV from '../locales/sv/translations.json'
+
+import flatten from 'flat'
+
+const messages = {
+  en: translationEN,
+  sv: translationSV,
+}
+
+addLocaleData([...en, ...sv])
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -42,6 +56,7 @@ const Header = styled.header`
   padding-bottom: 0;
   justify-content: space-between;
   grid-area: header;
+  margin-bottom: 20px;
 `
 
 const LogoLink = styled(Link)`
@@ -65,6 +80,8 @@ const Nav = styled.nav`
   display: flex;
   justify-content: center;
   grid-area: nav;
+
+  margin-top: 20px;
 `
 
 const NavLink = styled(Link)`
@@ -79,11 +96,12 @@ const NavLink = styled(Link)`
     props.theme.darkMode ? 'rgba(255,255,255, 0.8)' : 'rgba(0,0,0, 0.8)'};
 
   padding-top: 20px;
-  padding-left: 50px;
 
   font-family: Work Sans, sans-serif;
   font-size: 14px;
   font-weight: 500;
+
+  text-align: center;
 
   text-decoration: none;
   color: ${props => (props.theme.darkMode ? '#fff' : '#333')};
@@ -117,6 +135,11 @@ const NavLink = styled(Link)`
   :focus:after {
     height: 100%;
   }
+
+  @media (min-width: 500px) {
+    padding-left: 50px;
+    text-align: left;
+  }
 `
 
 export const CenterLayout = styled.div`
@@ -130,14 +153,28 @@ export const CenterLayout = styled.div`
 class Layout extends Component {
   state = {
     darkMode: false,
+    locale: 'en',
   }
 
   componentDidMount() {
     const darkMode = window.sessionStorage.getItem('darkMode') === 'true'
+    const locale =
+      window.sessionStorage.getItem('locale') === 'sv' ? 'sv' : 'en'
 
-    if (darkMode) {
-      this.setState({ darkMode })
-    }
+    this.setState({ darkMode, locale })
+  }
+
+  toggleLocale = e => {
+    e.preventDefault()
+
+    this.setState(
+      prevState => ({
+        locale: prevState.locale === 'en' ? 'sv' : 'en',
+      }),
+      () => {
+        window.sessionStorage.setItem('locale', this.state.locale)
+      }
+    )
   }
 
   invertTheme = () => {
@@ -152,7 +189,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { t } = this.props
+    const { locale } = this.state
 
     return (
       <StaticQuery
@@ -166,32 +203,43 @@ class Layout extends Component {
           }
         `}
         render={data => (
-          <ThemeProvider theme={this.state}>
-            <>
-              <Normalize />
-              <GlobalStyle />
-              <LayoutGrid>
-                <Header>
-                  <LogoLink to="/" tabIndex="-1">
-                    <img
-                      src={this.state.darkMode ? logoWhite : logoBlack}
-                      alt="Logo"
-                      width="64"
-                      height="64"
+          <IntlProvider locale={locale} messages={flatten(messages[locale])}>
+            <ThemeProvider theme={this.state}>
+              <>
+                <Normalize />
+                <GlobalStyle />
+                <LayoutGrid>
+                  <Header>
+                    <LogoLink to="/" tabIndex="-1">
+                      <img
+                        src={this.state.darkMode ? logoWhite : logoBlack}
+                        alt="Logo"
+                        width="64"
+                        height="64"
+                      />
+                    </LogoLink>
+                    <ActionBar
+                      invertTheme={this.invertTheme}
+                      locale={locale === 'en' ? 'sv' : 'en'}
+                      toggleLocale={this.toggleLocale}
                     />
-                  </LogoLink>
-
-                  <ActionBar invertTheme={this.invertTheme} />
-                </Header>
-                <Nav background={this.props.navBackground}>
-                  <NavLink to="/">{t('nav.home')}</NavLink>
-                  <NavLink to="/about/">{t('nav.about')}</NavLink>
-                  <NavLink to="/contact/">{t('nav.contact')}</NavLink>
-                </Nav>
-                {this.props.children}
-              </LayoutGrid>
-            </>
-          </ThemeProvider>
+                  </Header>
+                  <Nav background={this.props.navBackground}>
+                    <NavLink to="/">
+                      <FormattedMessage id="nav.home" />
+                    </NavLink>
+                    <NavLink to="/about/">
+                      <FormattedMessage id="nav.about" />
+                    </NavLink>
+                    <NavLink to="/contact/">
+                      <FormattedMessage id="nav.contact" />
+                    </NavLink>
+                  </Nav>
+                  {this.props.children}
+                </LayoutGrid>
+              </>
+            </ThemeProvider>
+          </IntlProvider>
         )}
       />
     )
@@ -202,4 +250,4 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default withNamespaces()(Layout)
+export default Layout

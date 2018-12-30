@@ -1,6 +1,9 @@
 {
-  "pageNotFoundTitle": "Page not found",
-  "pageNotFoundText": "The page you requested could not be found",
+  "404": {
+    "pageTitle": "Page not found",
+    "title": "Page not found",
+    "text": "The page you requested could not be found"
+  },
 
   "languageSwitcher": "Change language",
   "invertTheme": "Invert colors",
@@ -25,7 +28,8 @@
   "contact": {
     "pageTitle": "Contact",
     "title": "Let's get in touch!",
-    "info": "If you need a web developer I'm available for hire! Send me a message and I'll get back to you as soon as possible. <1></1><2></2>Don't like forms? Send me an <5>email</5> instead.",
+    "info": "If you need a web developer I'm available for hire! Send me a message and I'll get back to you as soon as possible.",
+    "emailText": "Don't like forms? Send me an {emailLink} instead.",
     "formName": "Name",
     "formEmail": "Email",
     "formBodyPlaceholder": "Write your message here...",

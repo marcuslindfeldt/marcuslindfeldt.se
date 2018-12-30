@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled, { keyframes, createGlobalStyle } from 'styled-components'
-import { withNamespaces } from 'react-i18next'
+import { FormattedMessage } from 'react-intl'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
@@ -30,8 +30,8 @@ const AboutMeText = styled.p`
   font-size: 18px;
   line-height: 25px;
   margin: 0;
+  margin-top: 20px;
   max-width: 450px;
-  margin-right: 30px;
   padding-top: 50px;
   opacity: 0;
   font-weight: 300;
@@ -51,15 +51,27 @@ const AboutMeText = styled.p`
     top: 0;
     left: 0;
   }
+
+  @media (min-width: 700px) {
+    margin-top: 0;
+    margin-right: 30px;
+  }
 `
 
-const Wrap = styled.main`
+const AboutLayout = styled.main`
   display: flex;
-  grid-column: 3 / last;
-  grid-row: 3 / last;
-  padding: 20px;
-  padding-left: 0;
-  overflow: hidden;
+
+  flex-direction: column-reverse;
+  grid-area: body;
+
+  @media (min-width: 700px) {
+    flex-direction: row;
+    overflow: hidden;
+    padding: 20px;
+    padding-left: 0;
+    grid-column: 3 / last;
+    grid-row: 3 / last;
+  }
 `
 
 const slideIn = keyframes`
@@ -96,19 +108,27 @@ export const query = graphql`
   }
 `
 
-const AboutPage = ({ t, data }) => (
+const AboutPage = ({ data }) => (
   <Layout navBackground>
     <BackgroundColor />
-    <SEO title={t('about.pageTitle')} />
-    <Wrap>
-      <AboutMeText>{t('about.aboutMeText')}</AboutMeText>
-      <Portrait
-        as={Img}
-        fluid={data.portrait.childImageSharp.fluid}
-        alt={t('about.portraitAlt')}
-      />
-    </Wrap>
+    <FormattedMessage id="about.pageTitle">
+      {txt => <SEO title={txt} />}
+    </FormattedMessage>
+    <AboutLayout>
+      <AboutMeText>
+        <FormattedMessage id="about.aboutMeText" />
+      </AboutMeText>
+      <FormattedMessage id="about.portraitAlt">
+        {txt => (
+          <Portrait
+            as={Img}
+            fluid={data.portrait.childImageSharp.fluid}
+            alt={txt}
+          />
+        )}
+      </FormattedMessage>
+    </AboutLayout>
   </Layout>
 )
 
-export default withNamespaces()(AboutPage)
+export default AboutPage

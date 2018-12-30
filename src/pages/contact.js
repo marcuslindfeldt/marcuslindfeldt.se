@@ -1,8 +1,9 @@
 import React from 'react'
-import { withNamespaces, Trans } from 'react-i18next'
 import styled, { keyframes } from 'styled-components'
 
 import Layout from '../components/layout'
+import { FormattedMessage } from 'react-intl'
+
 import SEO from '../components/seo'
 import ContactForm from '../components/contact-form'
 
@@ -95,11 +96,18 @@ const ContactLayout = styled.main`
   grid-area: body;
   align-self: center;
   display: flex;
+
+  flex-direction: column;
+
+  @media (min-width: 700px) {
+    flex-direction: row;
+  }
 `
 
 const ContactInfo = styled.div`
   flex: 3;
-  margin-right: 20px;
+  margin-right: 30px;
+  margin-bottom: 30px;
 `
 
 const MailtoLink = styled.a`
@@ -125,25 +133,31 @@ const MailtoLink = styled.a`
   }
 `
 
-const ContactPage = ({ t }) => (
+const ContactPage = () => (
   <Layout>
-    <SEO title={t('contact.pageTitle')} />
+    <FormattedMessage id="contact.pageTitle">
+      {txt => <SEO title={txt} />}
+    </FormattedMessage>
     <Background />
     <ContactLayout>
       <ContactInfo>
-        <ContactInfoTitle>{t('contact.title')}</ContactInfoTitle>
+        <ContactInfoTitle>
+          <FormattedMessage id="contact.title" />
+        </ContactInfoTitle>
         <ContactInfoText>
-          <Trans i18nKey="contact.info">
-            If you need a web developer I'm available for hire! Send me a
-            message and I'll get back to you as soon as possible. 
-            <br />
-            <br />
-            Don't like forms? Send me an{' '}
-            <MailtoLink href="mailto:marcus.lindfeldt@gmail.com">
-              email
-            </MailtoLink>{' '}
-            instead.
-          </Trans>
+          <FormattedMessage id="contact.info" />
+          <br />
+          <br />
+          <FormattedMessage
+            id="contact.emailText"
+            values={{
+              emailLink: (
+                <MailtoLink href="mailto:marcus.lindfeldt@gmail.com">
+                  email
+                </MailtoLink>
+              ),
+            }}
+          />
         </ContactInfoText>
       </ContactInfo>
       <ContactForm />
@@ -151,4 +165,4 @@ const ContactPage = ({ t }) => (
   </Layout>
 )
 
-export default withNamespaces()(ContactPage)
+export default ContactPage

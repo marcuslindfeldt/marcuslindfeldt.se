@@ -1,17 +1,24 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { FormattedMessage } from 'react-intl'
 import Layout, { CenterLayout } from '../components/layout'
 import SEO from '../components/seo'
 import { Title, Paragraph } from '../components/typography'
 
-const Thanks = ({ t }) => (
+const Thanks = () => (
   <Layout>
-    <SEO title={t('thanks.pageTitle')} />
+    <FormattedMessage id="thanks.pageTitle">
+      {txt => <SEO title={txt} />}
+    </FormattedMessage>
     <CenterLayout>
-      <Title>{t('thanks.title')}</Title>
-      <Paragraph>{t('thanks.text')}</Paragraph>
+      <Title>
+        <FormattedMessage id="thanks.title" />
+      </Title>
+
+      <Paragraph>
+        <FormattedMessage id="thanks.text" />
+      </Paragraph>
     </CenterLayout>
   </Layout>
 )
 
-export default withNamespaces()(Thanks)
+export default Thanks
