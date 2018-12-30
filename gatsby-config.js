@@ -1,9 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
-    description:
-      'Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.',
-    author: '@gatsbyjs',
+    title: 'marcuslindfeldt.se',
+    description: 'Personal website',
+    author: 'Marcus Lindfeldt',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -35,6 +34,12 @@ module.exports = {
         theme_color: '#f2f2f2',
         display: 'minimal-ui',
         icon: 'src/images/logo-black@2x.png', // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: process.env.GA_TRACKING_ID,
       },
     },
     `gatsby-plugin-eslint`,
