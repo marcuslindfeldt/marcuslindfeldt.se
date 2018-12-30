@@ -38,7 +38,8 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const LayoutGrid = styled.div`
-  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
   width: 100vw;
   display: grid;
   grid-template-rows: 50px auto 1fr auto;
@@ -157,6 +158,8 @@ class Layout extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0)
+
     const darkMode = window.sessionStorage.getItem('darkMode') === 'true'
     const locale =
       window.sessionStorage.getItem('locale') === 'sv' ? 'sv' : 'en'
