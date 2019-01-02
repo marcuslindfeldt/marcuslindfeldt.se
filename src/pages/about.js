@@ -25,6 +25,12 @@ const BackgroundColor = createGlobalStyle`
   }
 `
 
+const AboutLayout = styled(Layout)`
+  @media (min-width: 700px) and (min-height: 600px) {
+    height: 100vh;
+  }
+`
+
 const AboutMeText = styled.p`
   position: relative;
   font-family: Source Sans Pro, sans-serif;
@@ -59,7 +65,7 @@ const AboutMeText = styled.p`
   }
 `
 
-const AboutLayout = styled.main`
+const AboutContent = styled.main`
   display: flex;
 
   flex-direction: column-reverse;
@@ -91,7 +97,6 @@ const Portrait = styled.img`
   overflow: hidden;
   object-fit: cover;
   flex: 3;
-  will-change: transform;
   animation: ${slideIn} 250ms ease-out;
   transform-origin: right;
 `
@@ -110,12 +115,12 @@ export const query = graphql`
 `
 
 const AboutPage = ({ data }) => (
-  <Layout navBackground>
+  <AboutLayout navBackground>
     <BackgroundColor />
     <FormattedMessage id="about.pageTitle">
       {txt => <SEO title={txt} />}
     </FormattedMessage>
-    <AboutLayout>
+    <AboutContent>
       <AboutMeText>
         <FormattedMessage id="about.aboutMeText" />
       </AboutMeText>
@@ -128,8 +133,8 @@ const AboutPage = ({ data }) => (
           />
         )}
       </FormattedMessage>
-    </AboutLayout>
-  </Layout>
+    </AboutContent>
+  </AboutLayout>
 )
 
 AboutPage.propTypes = {

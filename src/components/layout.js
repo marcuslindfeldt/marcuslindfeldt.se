@@ -21,8 +21,7 @@ const GlobalStyle = createGlobalStyle`
 
 const LayoutGrid = styled.div`
   min-height: 100vh;
-  overflow: hidden;
-  width: 100vw;
+  width: 100%;
   display: grid;
   grid-template-rows: 50px auto 1fr auto;
   grid-template-columns: 50px 1fr minmax(200px, 750px) 1fr 50px;
@@ -47,7 +46,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { children, navBackground } = this.props
+    const { children, navBackground, ...rest } = this.props
     return (
       <Subscribe to={[ThemeContainer]}>
         {theme => (
@@ -56,7 +55,7 @@ class Layout extends Component {
               <>
                 <Normalize />
                 <GlobalStyle />
-                <LayoutGrid>
+                <LayoutGrid {...rest}>
                   <Header />
                   <Nav background={navBackground} />
                   {children}
