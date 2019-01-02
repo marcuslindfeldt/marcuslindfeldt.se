@@ -112,24 +112,18 @@ const ContactInfo = styled.div`
 
 const MailtoLink = styled.a`
   color: currentColor;
-  font-weight: 700;
+  font-weight: 500;
+  position: relative;
+  text-decoration: none;
 
   :focus,
   :hover {
-    color: ${props => (props.theme.darkMode ? '#fff' : '#000')};
-  }
-
-  :focus {
     outline: 0;
+    color: ${props => (props.theme.darkMode ? '#fff' : '#000')};
+    border-bottom: 2px solid
+      ${props => (props.theme.darkMode ? '#fff' : '#333')};
     background: ${props =>
-      props.theme.darkMode
-        ? 'rgba(255, 255, 255, 0.1)'
-        : 'rgba(0, 0, 0, 0.05)'};
-    outline: 2px solid
-      ${props =>
-        props.theme.darkMode
-          ? 'rgba(255, 255, 255, 0.1)'
-          : 'rgba(0, 0, 0, 0.05)'};
+      props.theme.darkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'};
   }
 `
 

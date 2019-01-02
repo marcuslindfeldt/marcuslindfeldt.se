@@ -68,12 +68,12 @@ const AboutMeText = styled.p`
 const AboutContent = styled.main`
   display: flex;
 
+  overflow: hidden;
   flex-direction: column-reverse;
   grid-area: body;
 
   @media (min-width: 700px) {
     flex-direction: row;
-    overflow: hidden;
     padding: 20px;
     padding-left: 0;
     grid-column: 3 / last;
@@ -94,11 +94,13 @@ const Portrait = styled.img`
   max-width: 100%;
   max-height: 100%;
   height: 100%;
-  overflow: hidden;
   object-fit: cover;
-  flex: 3;
   animation: ${slideIn} 250ms ease-out;
   transform-origin: right;
+
+  @media (min-width: 700px) {
+    flex: 3;
+  }
 `
 export const query = graphql`
   query {

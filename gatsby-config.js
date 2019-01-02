@@ -11,7 +11,7 @@ module.exports = {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
-          families: ['Work Sans:500,700', 'Source Sans Pro:300,400'],
+          families: ['Work Sans:500,700', 'Source Sans Pro:300,400,500'],
         },
       },
     },

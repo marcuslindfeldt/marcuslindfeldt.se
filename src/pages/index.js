@@ -108,12 +108,16 @@ const SocialListItem = styled.li`
 
 const SocialLink = styled.a`
   color: inherit;
-
+  line-height: 1.5;
   text-decoration: none;
+  font-weight: 500;
 
   :hover,
   :focus {
-    text-decoration: underline;
+    border-bottom: 2px solid
+      ${props => (props.theme.darkMode ? '#fff' : '#333')};
+    background: ${props =>
+      props.theme.darkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'};
     outline: 0;
   }
 `

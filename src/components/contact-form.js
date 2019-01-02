@@ -53,6 +53,11 @@ const SubmitButton = styled.button`
   }
 `
 
+const SendIcon = styled(ArrowForwardIcon)`
+  font-size: 20px !important;
+  color: #fff;
+`
+
 const encode = data =>
   Object.keys(data)
     .map(
@@ -126,7 +131,6 @@ class ContactForm extends Component {
         <FormInput
           as="textarea"
           name="message"
-          required
           cols="30"
           rows="10"
           aria-label={intl.formatMessage({ id: 'contact.formBodyLabel' })}
@@ -137,8 +141,7 @@ class ContactForm extends Component {
           onChange={this.handleChange}
         />
         <SubmitButton type="submit">
-          {intl.formatMessage({ id: 'contact.formSubmit' })}{' '}
-          <ArrowForwardIcon style={{ fontSize: '20px' }} />
+          {intl.formatMessage({ id: 'contact.formSubmit' })} <SendIcon />
         </SubmitButton>
       </Form>
     )
